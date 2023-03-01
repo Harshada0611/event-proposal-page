@@ -1,12 +1,17 @@
 const router = require('express').Router();
 const Proposal = require('../model/Proposal');
-const vendorAuthMiddleware = require('../middleware/vendorAuth')
+const fetchVendor = require('../middleware/vendorAuth');
+const fetchUser = require('../middleware/fetchUser');
+const upload = require('../middleware/uploadImages');
 
-
-router.post("/", async(req,res) => {
+//ROUTE 1: Creating a new proposal;(only for vendor and login required)
+router.post("/",fetchVendor, upload.single('image'), async(req,res) => {
     try{
         console.log(req.body);
-        const proposal = await Proposal.create(req.body);
+        const proposal = await Proposal.create({
+            ...req.body,
+            images: [req.file.filename]
+        });
         
         res.status(201).json({
             status:"Success",
@@ -17,9 +22,9 @@ router.post("/", async(req,res) => {
             status: "Failed",
             message:e.message
         })
-        console.log(e.message)
     }
 });
 
+    
 
 module.exports = router;
