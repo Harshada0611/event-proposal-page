@@ -16,5 +16,4 @@ const vendorRoute=require('./routes/vendor')
 app.use('/vendor',vendorRoute)
 
 
-
 module.exports = app;
