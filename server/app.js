@@ -10,4 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors());
 
+
+
+const vendorRoute=require('./routes/vendor')
+app.use('/vendor',vendorRoute)
+
+
 module.exports = app;
