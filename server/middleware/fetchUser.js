@@ -11,7 +11,7 @@ const fetchUser = async (req, res, next)=>{
     if(!token){
         return res.status(401).json({
             status: 'failure',
-            message: 'Acess denied'
+            message: 'Access denied'
         })
     }
     try{

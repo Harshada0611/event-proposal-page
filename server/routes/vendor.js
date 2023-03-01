@@ -36,6 +36,9 @@ router.post('/signin', async (req, resp) => {
         const vendor = await RegistrationModel.findOne({ contact: req.body.contact })
         if (vendor) {
             const matchPassword = await bcrypt.compare(req.body.password, vendor.password)
+            console.log(matchPassword)
+            console.log(vendor)
+            console.log(req.body)
             if (matchPassword) {
                 const dataToBeSentToFrontEnd = {
                     _id: vendor._id
