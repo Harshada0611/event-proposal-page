@@ -2,15 +2,25 @@ const router = require('express').Router();
 const Proposal = require('../model/Proposal');
 const fetchVendor = require('../middleware/vendorAuth');
 const fetchUser = require('../middleware/fetchUser');
-const upload = require('../middleware/uploadImages');
+const {upload, uploadToCloudinary} = require('../middleware/uploadImages');
 
 //ROUTE 1: Creating a new proposal;(only for vendor and login required)
-router.post("/",fetchVendor, upload.single('image'), async(req,res) => {
+router.post("/",fetchVendor, upload.array('images'), async(req,res) => {
     try{
         console.log(req.body);
+        let imageUrlList = [];
+  
+        for (let i = 0; i < req.files.length; i++) {
+            let locaFilePath = req.files[i].path;
+            // Upload the local image to Cloudinary
+            // and get image url as response
+            let result = await uploadToCloudinary(locaFilePath);
+            imageUrlList.push(result.url);
+        }
+
         const proposal = await Proposal.create({
             ...req.body,
-            images: [req.file.filename]
+            images: imageUrlList
         });
         
         res.status(201).json({
