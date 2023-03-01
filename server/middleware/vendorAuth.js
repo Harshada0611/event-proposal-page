@@ -2,17 +2,27 @@ const jwt = require('jsonwebtoken')
 
 const vendorAuthMiddleware = (req, resp, next) => {
     const token = req.headers.authorization
+    if(!token){
+        return resp.status(401).json({
+            status: 'failure',
+            message: 'Access denied'
+        })
+    }
     //console.log(token)
-    const decodedToken = jwt.verify(token, "secretKey")
+    try {
+        const {_id} = jwt.verify(token, "secretKey")
     //console.log(decodedToken)
 
-    if (decodedToken) {
-        req.body.vendor = decodedToken
+    if (_id){
+        req.body.vendor = _id;
        // console.log(req.body.vendor)
         next();
     }
-    else {
-        return resp.status(200).send({ success: false, message: "Invalid Token /Expired Token" })
+    }catch(e){
+        return resp.status(500).json({
+            status: 'failure',
+            message: e.message
+        })
     }
 }
 
