@@ -10,26 +10,26 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET
 
 //ROUTE:1 creating new user(login not required)
-router.post('/register', [
-    body('name', "Enter a valid name!!").isAlpha('en-IN',{ignore: ' '}),
+router.post('/registration', [
+    body('name', "Enter a valid name!!").isAlpha('en-IN', { ignore: ' ' }),
     body('email', "Enter a valid email!!").isEmail(),
-    body('password', "Password length needs to be min 5 characters!!").isLength({min: 5})
-], async (req, res)=>{
+    body('password', "Password length needs to be min 5 characters!!").isLength({ min: 5 })
+], async (req, res) => {
     console.log(req.body)
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         return res.status(400).json({
-            status: 'failure',
+            status: false,
             message: errors.array()
         })
     }
-    const {name, email, password, contact} = req.body
-    try{
+    const { name, email, password, contact } = req.body
+    try {
         //check if user already exists
-        let user = await User.findOne({email});
-        if(user){
+        let user = await User.findOne({ email });
+        if (user) {
             return res.status(400).json({
-                status: 'failure',
+                status: false,
                 message: 'A user already exists with this email!'
             })
         }
@@ -43,35 +43,35 @@ router.post('/register', [
             contact
         })
         return res.status(201).json({
-            status: 'success',
+            status: true,
+            message:'Account created successfully',
             user
         })
     }
-    catch(e){
+    catch (e) {
         return res.status(500).json({
-            status: 'failure',
+            status: false,
             message: e.message
         })
     }
 })
 
-
-//ROUTE:2- Logging in the existing user.
-router.post('/login',[
+// ROUTE:2- Logging in the existing user.
+router.post('/signin', [
     body('email', "Enter a valid email!!").isEmail(),
-    body('password', "Password length needs to be min 5 characters!!").isLength({min: 5})
-], async (req, res)=>{
+    body('password', "Password length needs to be min 5 characters!!").isLength({ min: 5 })
+], async (req, res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         return res.status(400).json({
             status: 'failure',
             message: errors.array()
         })
     }
-    const {email, password} = req.body
-    try{
+    const { contact, password } = req.body
+    try {
         //check if user exists
-        let user = await User.findOne({email});
+        let user = await User.findOne({ contact });
         if (!user) {
             return res.status(400).json({
                 status: 'failure',
@@ -98,7 +98,7 @@ router.post('/login',[
             name: user.name
         })
     }
-    catch(e){
+    catch (e) {
         return res.status(500).json({
             status: 'failure',
             message: e.message
