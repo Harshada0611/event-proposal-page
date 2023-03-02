@@ -1,0 +1,17 @@
+.banner{
+    background-image: url('../../../public/images/backgrounds/private-party-venues@2x.png');
+    height: 25vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.proposal-heading{
+    padding-left: 100px;
+    margin: 20px 0;
+}
+
+.cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
