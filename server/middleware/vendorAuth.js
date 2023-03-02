@@ -14,8 +14,7 @@ const vendorAuthMiddleware = (req, resp, next) => {
     //console.log(decodedToken)
 
     if (_id){
-        req.body.vendor = _id;
-       // console.log(req.body.vendor)
+        req.vendor = _id;
         next();
     }
     }catch(e){

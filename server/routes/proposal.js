@@ -20,6 +20,7 @@ router.post("/",fetchVendor, upload.array('images'), async(req,res) => {
 
         const proposal = await Proposal.create({
             ...req.body,
+            vendor: req.vendor,
             images: imageUrlList
         });
         
@@ -61,7 +62,7 @@ router.get('/all', fetchUser , async(req, res)=>{
         if(search){
             proposals = await Proposal.find({[attribute]:{$regex: search, $options:'-i'}});
         }else{
-            proposals = await Proposal.find();
+            proposals = await Proposal.find().populate('vendor');
         }
         res.status(200).json({
             status: 'success',

@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import profileIcon from './profileIcon.png'
 import logout from './logout.png'
 
-function LogoutBtn() {
+function LogoutBtn({setAuth}) {
 
     const navigate = useNavigate()
 
     //handle logout function
     const handleLogout = () => {
         localStorage.removeItem('vendorName') || localStorage.removeItem('userName') || localStorage.removeItem('token')
+        setAuth("")
         navigate('/')
     }
 

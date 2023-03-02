@@ -26,11 +26,11 @@ router.post('/registration', [
     const { name, email, password, contact } = req.body
     try {
         //check if user already exists
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ contact });
         if (user) {
             return res.status(400).json({
                 status: false,
-                message: 'A user already exists with this email!'
+                message: 'A user already exists with this contact!'
             })
         }
         //generating hash
@@ -58,7 +58,6 @@ router.post('/registration', [
 
 // ROUTE:2- Logging in the existing user.
 router.post('/signin', [
-    body('email', "Enter a valid email!!").isEmail(),
     body('password', "Password length needs to be min 5 characters!!").isLength({ min: 5 })
 ], async (req, res) => {
     const errors = validationResult(req);

@@ -1,26 +1,50 @@
 import './CardDetails.css';
-const CardDetails = ({ proposal }) => {
+import axios from '../../helpers/axios';
+import { useNavigate } from 'react-router-dom';
 
-    const getRandom = ()=>{
-        return Math.floor(Math.random() * 300)
+const CardDetails = ({ proposal, selected, setSelected }) => {
+    const navigate = useNavigate()
+
+    const handleClick = async (id)=>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await axios.put('/user/selected',{
+                selected: id
+            }, {
+                headers: {
+                    authorization: token
+                }
+            })
+            if(id !== null)setSelected(proposal);
+            else{
+                setSelected(null)
+            }
+            navigate('/user')
+        }
+        catch(e){
+            console.log(e)
+        }
     }
+
     return (
         <>
             <section className="heading-container">
-                <p>{'Proposals < '}<span className='bold'>Jhon Contract</span></p>
-                <button className='select-btn'>Select</button>
+                <p>{'Proposals < '}<span className='bold'>{proposal.name} Contract</span></p>
+                {selected === null ?<button className='select-btn' onClick={()=>handleClick(proposal._id)}>Select</button>
+                : selected._id === proposal._id ? <button className='deselct-btn' onClick={()=>handleClick(null)}>Remove</button>:
+                <button className='select-btn' disabled>Select</button>}
             </section>
             <section className="details-container">
                 <div className="details-card-container">
                     <div className="details-img-container">
-                        <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
+                        <img src={proposal.images[0]} alt="Random Event" />
                     </div>
                     <div className="id-container">
-                        <p>ID: <span className="bold">001</span></p>
+                        <p>ID: <span className="bold">{proposal._id}</span></p>
                     </div>
                     <div className="details-text-container">
-                        <p>Name: <span className="bold">Vendor Name</span></p>
-                        <p>Email: <span className="bold">sample@gmail.com</span></p>
+                        <p>Name: <span className="bold">{proposal.vendor.name}</span></p>
+                        <p>Email: <span className="bold">{proposal.vendor.email}</span></p>
                         <div className="details-date-container">
                             <p>Start Date: <span className="bold">20 Dec 2021</span> </p>
                             <p>End Date: <span className="bold">22 Dec 2021</span></p>
@@ -28,7 +52,7 @@ const CardDetails = ({ proposal }) => {
                         <div className="event-type-container">
                             <div>
                                 <p>Event Type</p>
-                                <span className="blue bold">Marriage</span>
+                                <span className="blue bold">{proposal.eventType}</span>
                             </div>
                             <div>
                                 <p>Event Class</p>
@@ -48,22 +72,20 @@ const CardDetails = ({ proposal }) => {
                 </section>
                 <section className="food-container">
                     <h2>Food Preferences</h2>
-                    <ul className='list'>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                    </ul>
+                    <div>
+                        <p>{proposal.foodPreference}</p>
+                    </div>
                 </section>
                 <div className="media-container">
                     <h2>My albums</h2>
                     <div className="media-album">
-                        <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
-                        <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
-                        <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
-                        <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
-                        <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
-                        <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
+                        {
+                            proposal.images.map((url)=>{
+                                return(
+                                    <img src={url} key={url}/>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 <section className="contacts-container">
@@ -72,28 +94,20 @@ const CardDetails = ({ proposal }) => {
                         <div className="contact">
                             <span className="circle"></span>
                             <span className='bold'>Contact 1</span>
-                            <p>+91 XXXXXXXXXX</p>
+                            <p>{proposal.vendor.contact}</p>
                         </div>
                         <div className="contact">
                             <span className="circle"></span>
-                            <h4>Contact 1</h4>
-                            <p>+91 XXXXXXXXXX</p>
-                        </div>
-                        <div className="contact">
-                            <span className="circle"></span>
-                            <h4>Contact 1</h4>
+                            <h4>Contact 2</h4>
                             <p>+91 XXXXXXXXXX</p>
                         </div>
                     </div>
                 </section>
                 <section className="events-container">
                     <h2>Events</h2>
-                    <ul className='list'>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                    </ul>
+                    <div>
+                        <p>{proposal.events}</p>
+                    </div>
                 </section>
             </section>
         </>
