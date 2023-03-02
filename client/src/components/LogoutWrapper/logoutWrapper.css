@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+    padding: 0rem;
+    margin: 0rem
+}
+
+.logout-profile-wrapper {
+    display: flex;
+}
+
+.profile-wrapper {
+    width: 15rem;
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
+.profile-wrapper h2 {
+    width: 80%;
+    font-family: 'candara';
+    color: #64A1F5;
+    text-align: right;
+    padding-top: 0.5rem;
+    padding-right: 1.2rem;
+}
+
+.profileIcon {
+    width: 3rem;
+    height: 3rem;
+    float: right;
+}
+
+
+.logoutBtn {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+}
+
+.logoutBtn:hover {
+    background-color: aliceblue;
+}
