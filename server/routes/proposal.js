@@ -24,12 +24,12 @@ router.post("/",fetchVendor, upload.array('images'), async(req,res) => {
         });
         
         res.status(201).json({
-            status:"Success",
+            status: 'success',
             proposal
         })
     } catch(e) {
         res.status(500).json({
-            status: "Failed",
+            status: false,
             message:e.message
         })
     }
