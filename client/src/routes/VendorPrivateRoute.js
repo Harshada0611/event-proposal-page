@@ -5,7 +5,6 @@ function VendorPrivateRoute() {
   const auth = localStorage.getItem('vendorName')
   return (
     auth ? (<Outlet />) : (<Navigate to='/user'/>)
-
   )
 }
 

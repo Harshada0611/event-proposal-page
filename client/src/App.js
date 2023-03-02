@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+//import { Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
-
 //navbar
 import Navbar from './components/navbar/Navbar';
 import PublicRoute from './routes/PublicRoute'
@@ -28,7 +27,6 @@ function App() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-
       <div className='NavbarWrapper'>
         <Navbar auth={auth} setAuth={setAuth}/>
       </div>
@@ -51,11 +49,14 @@ function App() {
 
 
         <Route element={<VendorPrivateRoute />}>
-          {/* <Route path='/vendor' element={<Vendor />}></Route> */}
-        </Route>
-      </Routes>
+          {/* <Route path='/vendor' element={<Vendor />}></Route> 
+        </></Route>
+      </Routes> */}
+      <CreateProposal/>
     </>
   );
 }
 
 export default App;
+
+

@@ -62,7 +62,7 @@ function VendorSignin({setAuth}) {
       <div className='signinbody-right'>
         <div className='signin-form-Wrapper'>
           <div className='form-navbar'>
-            <div className='form-navbar-toggles'><h3 style={{ color: '#4E94F4' }}  onClick={() => { navigate('/') }}>Vendor</h3></div>
+            <div className='form-navbar-toggles'><h3 style={{ color: '#4E94F4' }} onClick={() => { navigate('/') }}>Vendor</h3></div>
             <div className='form-navbar-toggles'><h3 onClick={() => { navigate('/user-signin') }}>User</h3></div>
           </div>
           <div className='signin-form'>
