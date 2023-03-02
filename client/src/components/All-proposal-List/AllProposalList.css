@@ -1,0 +1,37 @@
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  width:60em;
+  margin:auto; 
+  height: 4rem;
+  align-items: end;
+  padding-bottom: 0.5rem;
+  margin-top: 9rem;
+}
+.top-row-left {
+  display: flex;
+}
+h2 {
+  padding-left: 1rem;
+}
+.search-bar {
+  height: 1.5rem;
+  padding-top: 0.4rem;
+  margin-left: 1rem;
+}
+#search-box {
+  outline: none;
+  padding-left: 0.5rem;
+}
+.create-btn{
+  border: none;
+  outline: none;
+  height: 2.5rem;
+  width: 5rem;
+  background-color: #4E94F4;
+  color: #FFFFFF;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-transform:uppercase;
+}
