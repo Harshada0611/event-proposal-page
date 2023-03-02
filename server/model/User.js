@@ -21,7 +21,8 @@ const userSchema = new Schema({
     },
     selected:{
         type: Schema.Types.ObjectId,
-        ref: 'proposals'
+        ref: 'proposals',
+        default: null
     }
 }, {timestamps: true});
 
