@@ -4,6 +4,7 @@ const { body, validationResult } = require('express-validator');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const User = require('../model/User');
+const fetchUser = require('../middleware/fetchUser');
 
 dotenv.config();
 const jwtSecret = process.env.JWT_SECRET
@@ -105,4 +106,37 @@ router.post('/login',[
     }
 })
 
+//Route-3: to get selected proposal(user login required)
+router.get('/selected', fetchUser, async(req, res)=>{
+    try{
+        const user = await User.findOne({_id: req.user}).populate('selected');
+        res.status(200).json({
+            status: 'success',
+            selected: user.selected
+        })
+    }
+    catch(e){
+        return res.status(500).json({
+            status: 'failure',
+            message: e.message
+        })
+    }
+})
+
+//Route-4: Update selected proposal (user login required);
+router.put('/selected', fetchUser, async(req, res)=>{
+    try{
+        const user = await User.updateOne({_id: req.user}, {$set: req.body})
+        res.status(200).json({
+            status: 'success',
+            user
+        })
+    }
+    catch(e){
+        return res.status(500).json({
+            status: 'failure',
+            message: e.message
+        })
+    }
+})
 module.exports = router
