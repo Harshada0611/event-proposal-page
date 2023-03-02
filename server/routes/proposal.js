@@ -25,7 +25,7 @@ router.post("/",fetchVendor, upload.array('images'), async(req,res) => {
         });
         
         res.status(201).json({
-            status: 'success',
+            status: true,
             proposal
         })
     } catch(e) {
@@ -38,15 +38,21 @@ router.post("/",fetchVendor, upload.array('images'), async(req,res) => {
 
 //Route 2 : get all the proposals of a particular vendor(only for vendor and login required)
 router.get('/',fetchVendor ,async(req, res)=>{
+    const {search, attribute} = req.query;
     try {
-        const proposal = await Proposal.find({vendor: req.body.vendor})
+        let proposals;
+        if(search){
+            proposals = await Proposal.find({vendor: req.vendor, [attribute]:{$regex: search, $options:'-i'}}).populate('vendor');
+        }else{
+            proposals = await Proposal.find({vendor: req.vendor}).populate('vendor');
+        }
         return res.status(200).json({
-            status: 'success',
-            proposal
+            status: true,
+            proposals
         })
     } catch(e) {
         return res.status(500).json({
-            status: "Failed",
+            status: false,
             message:e.message
         })
     }
@@ -65,12 +71,12 @@ router.get('/all', fetchUser , async(req, res)=>{
             proposals = await Proposal.find().populate('vendor');
         }
         res.status(200).json({
-            status: 'success',
+            status: true,
             proposals
         })
     } catch(e) {
         return res.status(500).json({
-            status: "Failed",
+            status: false,
             message:e.message
         })
     }
@@ -81,7 +87,7 @@ router.delete('/:_id',fetchVendor ,async(req, res)=>{
     const {_id} = req.params;
     try{
         const proposal = await Proposal.findOne({_id});
-        if(proposal.vendor.toString() !== req.body.vendor){
+        if(proposal.vendor.toString() !== req.vendor){
             return res.status(401).json({
                 status:'failure',
                 message: "you can't delete others proposals"
@@ -89,13 +95,13 @@ router.delete('/:_id',fetchVendor ,async(req, res)=>{
         }
         const resp = await Proposal.deleteOne({_id});
         return res.status(200).json({
-            status: 'success',
+            status: true,
             message: 'proposal deleted successfully',
             resp
         })
     } catch(e) {
         return res.status(500).json({
-            status: "Failed",
+            status: false,
             message:e.message
         })
     }
@@ -107,22 +113,22 @@ router.put('/:_id', fetchVendor,async(req, res)=>{
     const {_id} = req.params;
     try{
         const proposal = await Proposal.findOne({_id});
-        if(proposal.vendor.toString() !== req.body.vendor){
+        if(proposal.vendor.toString() !== req.vendor){
             return res.status(401).json({
-                status:'failure',
+                status:false,
                 message: "you can't edit others proposals"
             })
         }
         const resp = await Proposal.updateOne({_id}, {$set: req.body});
         return res.status(200).json({
-            status: 'success',
+            status: true,
             message: 'proposal updated successfully',
             resp
         })
 
     }catch(e) {
         return res.status(500).json({
-            status: "Failed",
+            status: false,
             message:e.message
         })
     }

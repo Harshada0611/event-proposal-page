@@ -1,37 +1,117 @@
+.AllProposalList-wrapper{
+  width: 70vw;
+  margin: 0 auto;
+  margin-top: 80px;
+}
 .top-row {
   display: flex;
+  height: 50px;
   justify-content: space-between;
-  width:60em;
-  margin:auto; 
-  height: 4rem;
-  align-items: end;
-  padding-bottom: 0.5rem;
-  margin-top: 9rem;
+  align-items: center;
 }
 .top-row-left {
   display: flex;
 }
-h2 {
-  padding-left: 1rem;
-}
-.search-bar {
-  height: 1.5rem;
-  padding-top: 0.4rem;
-  margin-left: 1rem;
-}
-#search-box {
-  outline: none;
-  padding-left: 0.5rem;
-}
 .create-btn{
   border: none;
   outline: none;
-  height: 2.5rem;
-  width: 5rem;
   background-color: #4E94F4;
   color: #FFFFFF;
-  border-radius: 0.5rem;
-  margin-top: 1rem;
-  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 10px;
   text-transform:uppercase;
+  font-size: 1.2rem;
+  padding: 0.5em 1em;
+  text-decoration: none;
+}
+
+.create-btn:hover{
+  background-color: black;
+  color: #fff;
+}
+
+.search-bar>.input-container{
+  display: flex;
+  column-gap: 20px;
+}
+
+.search-bar>.input-container>button{
+  font-weight: 1rem;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+
+.search-bar>.input-container>button:hover{
+  background-color: black;
+  color: #FFFFFF;
+}
+
+.edit-modal{
+  position: absolute;
+  top: -300%;
+  left: 300px;
+  background-color: #fff;
+  z-index: 1;
+  transition: top;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+}
+
+.edit-form-container{
+  width: 60vw;
+    margin: 0 auto;
+    border: var(--border);
+    border-radius: 12px;
+    box-shadow: 10px 10px 5px grey;
+}
+
+.edit-form-container>form>.proposal-form-btn-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.delete-modal{
+  position: fixed;
+  top: 100px;
+  left: 400px;
+  box-shadow: 5px 5px 10px 2px grey;
+  border-radius: 10px;
+  border: 1px solid grey;
+  z-index: 1;
+  transition: top;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+}
+
+.delete-modal-container{
+  width: 40vw;
+  background-color: lightgray;
+  padding: 20px;
+}
+
+.delete-modal-container>h2{
+  color: red;
+}
+
+.delete-btns>button{
+font-size: 1rem;
+padding: 0.5em 1em;
+border-radius: 3px;
+border: 1px solid grey;
+}
+
+.delete-btns>button:first-child:hover{
+  background-color: tomato;
+}
+
+.delete-btns>button:last-child:hover{
+  background-color: yellowgreen;
+}
+
+.delete-btns{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }

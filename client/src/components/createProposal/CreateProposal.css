@@ -14,11 +14,9 @@
     font-size: 2rem;
     letter-spacing: 0.78px;
     color: #393A3B;
-    border: 0.5px solid #CCCCCC ;
+    border-bottom: 0.5px solid #CCCCCC ;
     padding: 10px 0;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-    border-color:#CCCCCC;
+    margin:auto;
 }
 
 .proposal-form-container>form {
@@ -63,8 +61,8 @@
 .proposal-form-btn-container {
     display: flex;
     justify-content: center;
-    border: var(--border);
-    padding: 10px 0;
+    border-top: 1px solid #CCCCCC;
+    padding-top: 20px;
 }
 
 .proposal-form-btn-container>button {
@@ -101,6 +99,11 @@ input[type='file'] {
     margin-top: 20px;
 }
 
+.images-preview>img{
+    width: 60px;
+    height: 60px;
+    margin: 2px;
+}
 
 input, textarea,select {
     border: var(--border);

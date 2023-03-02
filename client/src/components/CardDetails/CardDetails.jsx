@@ -46,8 +46,8 @@ const CardDetails = ({ proposal, selected, setSelected }) => {
                         <p>Name: <span className="bold">{proposal.vendor.name}</span></p>
                         <p>Email: <span className="bold">{proposal.vendor.email}</span></p>
                         <div className="details-date-container">
-                            <p>Start Date: <span className="bold">20 Dec 2021</span> </p>
-                            <p>End Date: <span className="bold">22 Dec 2021</span></p>
+                            <p>Start Date: <span className="bold">{proposal.from.split('T')[0]}</span> </p>
+                            <p>End Date: <span className="bold">{proposal.to.split('T')[0]}</span></p>
                         </div>
                         <div className="event-type-container">
                             <div>

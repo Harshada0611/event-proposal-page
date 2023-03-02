@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
-//import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 //navbar
 import Navbar from './components/navbar/Navbar';
@@ -17,6 +17,8 @@ import UserSignin from './components/user/user-signin/UserSignin';
 import UserRegistration from './components/user/user-registartion/UserRegistration';
 import Home from './components/Home/Home';
 import CardDetails from './components/CardDetails/CardDetails';
+import CreateProposal from './components/createProposal/CreateProposal';
+import AllProposalList from './components/All-proposal-List/AllProposalList';
 //public route ends
 
 //user private routes
@@ -42,17 +44,15 @@ function App() {
 
         <Route element={<UserPrivateRoute />}>
           <Route path='/user' element={<Home selected={selected} setSelected={setSelected} setDetails={setDetails}/>}></Route>
-        </Route>
-        <Route element={<UserPrivateRoute />}>
           <Route path='/proposal-details' element={<CardDetails proposal={details} selected={selected} setSelected={setSelected}/>}></Route>
         </Route>
 
-
         <Route element={<VendorPrivateRoute />}>
-          {/* <Route path='/vendor' element={<Vendor />}></Route> 
-        </></Route>
-      </Routes> */}
-      <CreateProposal/>
+          <Route path='/newProposal' element={<CreateProposal/>}></Route> 
+          <Route path='/vendor' element={<AllProposalList/>}></Route> 
+        </Route>
+        
+      </Routes>
     </>
   );
 }
