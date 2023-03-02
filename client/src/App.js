@@ -16,6 +16,7 @@ import VendorRegistration from './component/vendor/vendor-registration/VendorReg
 //user routes
 import UserSignin from './component/user/user-signin/UserSignin';
 import UserRegistration from './component/user/user-registartion/UserRegistration';
+import Home from './components/Home/Home';
 //public route ends
 
 //user private routes
@@ -41,7 +42,7 @@ function App() {
 
 
         <Route element={<UserPrivateRoute />}>
-          {/* <Route path='/user' element={<User />}></Route> */}
+          <Route path='/user' element={<Home/>}></Route>
         </Route>
 
 
