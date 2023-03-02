@@ -1,16 +1,22 @@
 .banner{
+    background-image: url('../../../public/images/backgrounds/banner.png');
     height: 25vh;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: 70px;
+}
+
+.main-section{
+    width: 90vw;
+    margin: 0 auto;
 }
 
 .proposal-heading{
-    padding-left: 100px;
-    margin: 20px 0;
+    color: #575A5D;
+    margin:20px 0;
 }
 
 .cards-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }

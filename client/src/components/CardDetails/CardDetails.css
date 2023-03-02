@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 50px;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 .heading-container>.select-btn{
@@ -13,8 +13,25 @@
     background-color: #fff;
 }
 
-.heading-container>.select-btn:hover{
+.heading-container>.deselct-btn{
+    border: 1px solid tomato;
+    border-radius: 4px;
+    color: red;
+    padding: 0.5em 1em;
+    background-color: #fff;
+}
+
+.heading-container>.deselct-btn:hover{
     font-weight: bold;
+}
+
+.heading-container>.select-btn:enabled:hover{
+    font-weight: bold;
+}
+
+.heading-container>.select-btn:disabled{
+    background-color: grey;
+    color: black;
 }
 
 .details-container{
@@ -153,6 +170,4 @@
 .details-container>.events-container{
     grid-row: 3/4;
     grid-column: 6/9;
-    overflow-x: hidden;
-    overflow-y: scroll;
 }

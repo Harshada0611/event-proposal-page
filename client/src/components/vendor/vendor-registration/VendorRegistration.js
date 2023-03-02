@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../../helpers/axios'
 import toast from 'react-hot-toast';
 
 import './vendorRegistration.css'
 
 
-const vendorRegistrationURL = 'http://localhost:5000/vendor/registration'
+const vendorRegistrationURL = '/vendor/registration'
 
 function VendorRegistration() {
 

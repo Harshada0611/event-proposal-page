@@ -1,18 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import './Card.css';
-const Card = ({proposal})=>{
-
-    const getRandom = ()=>{
-        return Math.floor(Math.random() * 300)
+const Card = ({proposal, setDetails})=>{
+    const navigate = useNavigate()
+    const handleClick = ()=>{
+        setDetails(proposal);
+        navigate('/proposal-details')
     }
     return(
-        <section className="card-container">
+        <section className="card-container" onClick={handleClick}>
             <div className="img-container">
-                <img src={`https://source.unsplash.com/random/?event&sig=${getRandom()}`} alt="Random Event" />
+                <img src={proposal.images[0]} alt="Random Event" />
             </div>
             <div className="text-container">
                 <h2>{proposal.name}</h2>
                 <h4>{proposal.budget}/-</h4>
-                <p>{proposal.city}</p>
+                <p>{proposal.place}</p>
             </div>
         </section>
     )

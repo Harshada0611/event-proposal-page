@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../../helpers/axios'
 import toast from 'react-hot-toast';
 import './userRegistration.css'
 
 
-const userRegistrationURL = 'http://localhost:5000/user/registration'
+const userRegistrationURL = '/user/registration'
 
 function UserRegistration() {
 
@@ -47,9 +47,9 @@ function UserRegistration() {
       const userDetails = { name, email, contact, password, confirmPassword }
       try {
         const response = await axios.post(userRegistrationURL, userDetails)
-
-        if (!response.data.status) {
-          toast.error(response.data.message)
+        if (response.data.status) {
+          navigate('/user-signin')
+          toast.success(response.data.message)
         }
         else {
           navigate('/user-signin')
@@ -58,6 +58,12 @@ function UserRegistration() {
       }
       catch (err) {
         console.log(err)
+        const { response } = err;
+        if (Array.isArray(response.data.message)) {
+          toast.error(response.data.message[0].msg)
+        } else {
+          toast.error(response.data.message)
+        }
       }
     }
     else {

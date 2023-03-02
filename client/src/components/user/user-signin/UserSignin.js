@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios from '../../../helpers/axios'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import './userSignin.css'
 
-const userSigninURL = 'http://localhost:5000/user/signin'
+const userSigninURL = '/user/signin'
 
 
-function UserSignin() {
+function UserSignin({setAuth}) {
 
   const navigate = useNavigate()
 
@@ -38,8 +38,9 @@ function UserSignin() {
       if (response.data.status) {
         //we have to store token in localStorage
         toast.success(response.data.message)
-        localStorage.setItem('token', (response.data.data.token))
-        localStorage.setItem('userName', (response.data.data.name))
+        localStorage.setItem('token', (response.data.token))
+        localStorage.setItem('userName', (response.data.name))
+        setAuth(response.data.name)
         navigate('/user')
       }
       else {
@@ -49,6 +50,15 @@ function UserSignin() {
     }
     catch (err) {
       //hide loader
+      toast.dismiss()
+      const {response} = err;
+      console.log(err);
+      if(Array.isArray(response.data.message)){
+        toast.error(response.data.message[0].msg)
+      }else{
+        toast.error(response.data.message)
+      }
+
     }
 
   }

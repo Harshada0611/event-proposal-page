@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios from '../../../helpers/axios'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import './vendorSignin.css'
 
-const vendorSigninURL = 'http://localhost:5000/vendor/signin'
+const vendorSigninURL = '/vendor/signin'
 
 
-function VendorSignin() {
+function VendorSignin({setAuth}) {
 
   const navigate = useNavigate()
 
@@ -39,6 +39,7 @@ function VendorSignin() {
         //we have to store token in localStorage
         localStorage.setItem('token', (response.data.data.token))
         localStorage.setItem('vendorName', (response.data.data.name))
+        setAuth(response.data.data.name)
         navigate('/vendor')
       }
       else {
