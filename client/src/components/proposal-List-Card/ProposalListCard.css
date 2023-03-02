@@ -1,13 +1,15 @@
-.card-container {
-  margin-top: 1rem;
-  margin-left: 15%;
+.proposal-card-container {
+  margin-top: 20px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
 box-shadow: 0px 3px 6px #00000029;
 border: 1px solid #425E81;
 border-radius: 4px;
 opacity: 1;
-width: 60em;
-height: 8.5em;
+width: 100%;
+}
+
+.card-container:hover{
+  border:2px solid #64A1F5;
 }
 .l-h {
   text-align: left;
@@ -27,7 +29,10 @@ opacity: 1;
 .lower-part {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   row-gap: 5px;
+  width: 100%;
+  position: relative;
 }
 .main-header {
   text-align: left;
@@ -51,6 +56,18 @@ padding-top: 1em;
   padding-left: 1.6em;
   padding-top: 0.2em;
   padding-bottom: 0.81em;
+}
+
+.icons{
+  position: absolute;
+  right: 0;
+  display: flex;
+}
+
+.icons>div{
+  margin: 0 10px;
+  color: rgb(165, 165, 165);
+  padding-right: 10px;
 }
 
 

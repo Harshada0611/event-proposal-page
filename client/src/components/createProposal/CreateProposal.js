@@ -1,57 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./CreateProposal.css"
-import axios from "axios";
+import axios from "../../helpers/axios";
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-const CreateProposalUrl = 'http://localhost:5000/proposal'
 const CreateProposal = () => {
+  const navigate = useNavigate();
   const [newProposal, setNewProposal] = useState({
-    eventName : "",
-    eventPlace : "",
-    proposalType : "",
-    eventType : "",
-    budget : "",
-    from : "",
-    to : "",
-    description : "",
-    // images : "",
-    foodPreference : "",
-    events : ""
+    name: "",
+    place: "",
+    proposalType: "",
+    eventType: "",
+    budget: "",
+    from: "",
+    to: "",
+    description: "",
+    foodPreference: "",
+    events: ""
   });
-  // const [images, getImages] = useState();
+  const [images, setImages] = useState([]);
 
   const handleInputValues = (event) => {
-    const {name,value} = event.target;
-      setNewProposal(prevState => ({...prevState, [name]:value}))
+    const { name, value } = event.target;
+    setNewProposal(prevState => ({ ...prevState, [name]: value }))
   }
-  
 
-  const onSubmit = async (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    toast.loading('Creating new proposal')
     try {
+      const formdata = new FormData();
+      for (let key of Object.keys(newProposal)) {
+        formdata.append(key, newProposal[key]);
+      }
+      for(let image of images){
+        formdata.append('images', image)
+      }
       const token = localStorage.getItem("token")
-      // const newCreatedProposal = { eventName, eventPlace, proposalType, eventType, budget, from, to, description, foodPreference, events}
-      const response = await axios.post(CreateProposalUrl, newProposal, {
+      const { data } = await axios.post('/proposal', formdata, {
         headers: {
-          authorization : token
+          authorization: token
         }
       })
-      if(response.data.status) {
-        console.log("success", response.data)
-      } else {
-        console.log("failed")
+      console.log(data)
+      if (data.status) {
+        toast.dismiss()
+        toast.success('Proposal created successfully')
+        console.log("success", data);
+        navigate('/vendor')
       }
-      console.log(response.data);
-    } catch (error) {
-      console.log('error');
+    } catch (err) {
+      toast.dismiss()
+      const { response } = err;
+      console.log(err);
+      if (Array.isArray(response.data.message)) {
+        toast.error(response.data.message[0].msg)
+      } else {
+        toast.error(response.data.message)
+      }
     }
-   // console.log(newProposal);
+    // console.log(newProposal);
   }
 
   return (
     <section className="proposal-form-container">
-      
+
       <h1 className="proposal-form-heading">Create Proposal</h1>
-      <form >
+      <form onSubmit={handleSubmit}>
         <div className="proposal-form-input-container">
           <div className="proposal-form-column">
             <div className="input-container">
@@ -59,37 +75,47 @@ const CreateProposal = () => {
               <input
                 type="text"
                 id='name'
-                name='eventName'
-                placeholder='Name' value={newProposal.eventName} onChange = {handleInputValues}
-                />
+                name='name'
+                placeholder='Name' value={newProposal.name} onChange={handleInputValues}
+                autoComplete="off"
+                required
+              />
             </div>
             <div className="row">
               <div className="input-container">
                 <label htmlFor="place">Place of Event</label>
-                <select name="eventPlace" id="place" value={newProposal.eventPlace} onChange = {handleInputValues}>
+                <select name="place" id="place" required value={newProposal.place} onChange={handleInputValues}>
+                  <option value="Select">Select</option>
                   <option value="Bangalore">Bangalore</option>
                   <option value="Delhi">Delhi</option>
                   <option value="Mumbai">Mumbai</option>
                   <option value="Chennai">Chennai</option>
-                  <option value="Kolkata">Kolkata</option>
+                  <option value="Kochi">Kochi</option>
+                  <option value="Pune">Pune</option>
+                  <option value="Hyderabad">Hyderabad</option>
                 </select>
               </div>
               <div className="input-container">
                 <label htmlFor="proposalType">Proposal Type</label>
-                <select name="proposalType" id="proposalType" value={newProposal.proposalType} onChange = {handleInputValues}>
+                <select name="proposalType" id="proposalType" required value={newProposal.proposalType} onChange={handleInputValues}>
+                  <option value="Select">Select</option>
                   <option value="Venue">Venue</option>
                   <option value="Food">Food</option>
+                  <option value="Events">Events</option>
                 </select>
               </div>
             </div>
             <div className="row">
               <div className="input-container">
                 <label htmlFor="eventType">Event Type</label>
-                <select name="eventType" id="eventType" value={newProposal.eventType} onChange = {handleInputValues}>
+                <select name="eventType" id="eventType" required value={newProposal.eventType} onChange={handleInputValues}>
+                  <option value="Select">Select</option>
                   <option value="Birthday">Birthday</option>
-                  <option value="Marriage">Marriage</option>
-                  <option value="Anniversary">Anniversary</option>
+                  <option value="Wedding">Wedding</option>
+                  <option value="Casual">Casual</option>
                   <option value="Engagement">Engagement</option>
+                  <option value="Awareness Campaigns">Awareness Campaigns</option>
+                  <option value="Other">other</option>
                 </select>
               </div>
               <div className="input-container">
@@ -98,8 +124,10 @@ const CreateProposal = () => {
                   type="number"
                   name="budget"
                   placeholder='0000'
-                  id="budget" 
-                  value={newProposal.budget} onChange = {handleInputValues}
+                  id="budget"
+                  autoComplete="off"
+                  required
+                  value={newProposal.budget} onChange={handleInputValues}
                 />
               </div>
             </div>
@@ -111,7 +139,9 @@ const CreateProposal = () => {
                   name="from"
                   placeholder='DD-MM-YYYY'
                   id="dateFrom"
-                  value={newProposal.from} onChange = {handleInputValues}
+                  autoComplete="off"
+                  required
+                  value={newProposal.from} onChange={handleInputValues}
                 />
               </div>
               <div className="input-container">
@@ -121,7 +151,9 @@ const CreateProposal = () => {
                   name="to"
                   placeholder='DD-MM-YYYY'
                   id="dateTo"
-                  value={newProposal.to} onChange = {handleInputValues}
+                  autoComplete="off"
+                  required
+                  value={newProposal.to} onChange={handleInputValues}
                 />
               </div>
             </div>
@@ -131,7 +163,7 @@ const CreateProposal = () => {
                 name="description"
                 id="description"
                 cols="30" rows="10"
-                placeholder='Description' value={newProposal.description} onChange = {handleInputValues}
+                placeholder='Description' value={newProposal.description} onChange={handleInputValues}
               ></textarea>
             </div>
           </div>
@@ -139,24 +171,39 @@ const CreateProposal = () => {
             <div className="proposal-form-img-container">
               <div className="input-container">
                 <label htmlFor="image">Images<span className='add-btn'>Add</span></label>
-                <input type="file" name="image" id="image" />
+                <input
+                  type="file"
+                  name="image"
+                  id="image"
+                  autoComplete="off"
+                  onChange={(e) => setImages([...images, ...e.target.files])}
+                  multiple="multiple"
+                  required
+                />
                 <div className="images-preview">
+                  {
+                    images.map((image) => {
+                      return (
+                        <img src={URL.createObjectURL(image)} alt="" />
+                      )
+                    })
+                  }
                 </div>
               </div>
               <div className="input-container">
                 <label htmlFor="food">Food Preferences</label>
-                <textarea name="foodPreference" id="food" cols="30" rows="7" placeholder='Preferences' 
-                value={newProposal.foodPreference} onChange = {handleInputValues}></textarea>
+                <textarea name="foodPreference" id="food" cols="30" rows="7" placeholder='Preferences'
+                  value={newProposal.foodPreference} onChange={handleInputValues}></textarea>
               </div>
               <div className="input-container">
                 <label htmlFor="event">Events</label>
-                <textarea name="events" id="event" cols="30" rows="7" placeholder='Preferences' value={newProposal.events} onChange = {handleInputValues}></textarea>
+                <textarea name="events" id="event" cols="30" rows="7" placeholder='Preferences' value={newProposal.events} onChange={handleInputValues}></textarea>
               </div>
             </div>
           </div>
         </div>
         <div className="proposal-form-btn-container">
-          <button onClick={onSubmit}>Post</button>
+          <button>Post</button>
         </div>
       </form>
     </section>

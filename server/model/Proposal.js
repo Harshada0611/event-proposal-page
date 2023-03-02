@@ -15,9 +15,9 @@ const proposalSchema = new Schema({
         enum:["Venue", "Food", "Events"],
         default: "Venue"
     },
-    evenType : {
+    eventType : {
         type:String,
-        enum: ["Birthday", "Engagement", "Wedding", "Casual", "Awareness Campaigns"],
+        enum: ["Birthday", "Engagement", "Wedding", "Casual", "Awareness Campaigns", "Other"],
     },
     budget : {
         type : Number,

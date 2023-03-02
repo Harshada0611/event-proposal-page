@@ -30,7 +30,8 @@
 }
 
 .heading-container>.select-btn:disabled{
-    background-color: grey;
+    background-color: lightgray;
+    opacity: 0.5;
     color: black;
 }
 
