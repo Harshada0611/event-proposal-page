@@ -35,7 +35,7 @@ function UserSignin() {
       toast.loading('Loading...')
       const response = await axios.post(userSigninURL, userObj)
       toast.dismiss()
-      if (response.data.success) {
+      if (response.data.status) {
         //we have to store token in localStorage
         toast.success(response.data.message)
         localStorage.setItem('token', (response.data.data.token))

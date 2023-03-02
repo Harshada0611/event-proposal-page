@@ -1,23 +1,23 @@
 import React from 'react'
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+//import { Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
+import CreateProposal from './components/createProposal/CreateProposal';
+// //navbar
+// import Navbar from './components/navbar/Navbar';
+// import PublicRoute from './routes/PublicRoute'
+// import UserPrivateRoute from './routes/UserPrivateRoute'
+// import VendorPrivateRoute from './routes/VendorPrivateRoute';
 
-//navbar
-import Navbar from './component/navbar/Navbar';
-import PublicRoute from './routes/PublicRoute'
-import UserPrivateRoute from './routes/UserPrivateRoute'
-import VendorPrivateRoute from './routes/VendorPrivateRoute';
-
-//public route
-//vendor routes
-import VendorSignin from './component/vendor/vendor-signin/VendorSignin';
-import VendorRegistration from './component/vendor/vendor-registration/VendorRegistration'
-//user routes
-import UserSignin from './component/user/user-signin/UserSignin';
-import UserRegistration from './component/user/user-registartion/UserRegistration';
-import Home from './components/Home/Home';
-//public route ends
+// //public route
+// //vendor routes
+// import VendorSignin from './components/vendor/vendor-signin/VendorSignin';
+// import VendorRegistration from './components/vendor/vendor-registration/VendorRegistration'
+// //user routes
+// import UserSignin from './components/user/user-signin/UserSignin';
+// import UserRegistration from './components/user/user-registartion/UserRegistration';
+// import Home from './components/Home/Home';
+// //public route ends
 
 //user private routes
 
@@ -28,7 +28,7 @@ function App() {
     <>
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className='NavbarWrapper'>
+      {/* <div className='NavbarWrapper'>
         <Navbar />
       </div>
       
@@ -47,11 +47,14 @@ function App() {
 
 
         <Route element={<VendorPrivateRoute />}>
-          {/* <Route path='/vendor' element={<Vendor />}></Route> */}
-        </Route>
-      </Routes>
+          {/* <Route path='/vendor' element={<Vendor />}></Route> 
+        </></Route>
+      </Routes> */}
+      <CreateProposal/>
     </>
   );
 }
 
 export default App;
+
+

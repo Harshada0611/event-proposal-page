@@ -40,21 +40,24 @@ function UserRegistration() {
     if (name === "" || email === "" || contact === "" || password === "" || confirmPassword === "") {
       toast.error('Empty form fields not allowed')
     }
+    else if (password.length >= 1 && password.length < 5) {
+      toast.error()
+    }
     if (password === confirmPassword) {
       const userDetails = { name, email, contact, password, confirmPassword }
       try {
         const response = await axios.post(userRegistrationURL, userDetails)
-        if (response.data.success) {
-          navigate('/user-signin')
-          toast.success(response.data.message)
+
+        if (!response.data.status) {
+          toast.error(response.data.message)
         }
         else {
-          toast.error(response.data.message)
+          navigate('/user-signin')
+          toast.success(response.data.message)
         }
       }
       catch (err) {
         console.log(err)
-        toast.error('Something went wrong')
       }
     }
     else {

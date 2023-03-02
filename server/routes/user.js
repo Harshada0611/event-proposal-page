@@ -26,7 +26,7 @@ router.post('/registration', [
     const { name, email, password, contact } = req.body
     try {
         //check if user already exists
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ contact });
         if (user) {
             return res.status(400).json({
                 status: false,
