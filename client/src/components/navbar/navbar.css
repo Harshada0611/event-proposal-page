@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+    padding: 0rem;
+    margin: 0rem;
+}
+
+
+.Navbar{
+    width: 100%;
+    padding-top: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1{
+    font-family: 'candara';
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+    margin-left: 2rem;
+}
+
+
