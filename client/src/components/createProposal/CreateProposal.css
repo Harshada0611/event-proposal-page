@@ -102,6 +102,10 @@
     border: var(--border);
 }
 
+.proposal-form-btn-container>button:hover {
+    color: black;
+}
+
 input[type='file'] {
     display: none;
     border: var(--border);
@@ -114,6 +118,11 @@ input[type='file'] {
     border-radius: 4px;
     font-size: 0.7rem;
     padding: 0.5em 1em;
+}
+
+.add-btn:hover{
+    background-color: #2D2D2E;
+    color: #FFFFFF;
 }
 
 .images-preview {
