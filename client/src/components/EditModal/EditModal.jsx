@@ -22,6 +22,7 @@ const EditModal = ({proposal, setEdit, editModal}) => {
     }
 
     const handleDiscard = (e)=>{
+        document.body.style.pointerEvents = 'auto';
         editModal.current.style.top = '-300%'
         setEdit({bool: false});
     }
@@ -39,6 +40,7 @@ const EditModal = ({proposal, setEdit, editModal}) => {
             toast.dismiss()
             toast.success('Proposal updated successfully')
             editModal.current.style.top = '-300%'
+            document.body.style.pointerEvents = 'auto';
             setEdit({bool: false});
         } catch (error) {
             console.log(error);

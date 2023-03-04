@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Proposal = require('../model/Proposal');
 const fetchVendor = require('../middleware/vendorAuth');
 const fetchUser = require('../middleware/fetchUser');
-const {upload, uploadToCloudinary} = require('../middleware/uploadImages');
+const {upload, resizeImage} = require('../middleware/uploadImages');
 
 //ROUTE 1: Creating a new proposal;(only for vendor and login required)
 router.post("/",fetchVendor, upload.array('images'), async(req,res) => {
@@ -14,7 +14,7 @@ router.post("/",fetchVendor, upload.array('images'), async(req,res) => {
             let locaFilePath = req.files[i].path;
             // Upload the local image to Cloudinary
             // and get image url as response
-            let result = await uploadToCloudinary(locaFilePath);
+            const result = await resizeImage(locaFilePath)
             imageUrlList.push(result.url);
         }
 
@@ -62,13 +62,13 @@ router.get('/',fetchVendor ,async(req, res)=>{
 //Route 3 : Getting all the proposals (only for users and login required)
 router.get('/all', fetchUser , async(req, res)=>{
     //to add serach bar in page 14
-    const {search, attribute} = req.query;
+    const {search, attribute, page=1} = req.query;
     try{
         let proposals;
         if(search){
-            proposals = await Proposal.find({[attribute]:{$regex: search, $options:'-i'}});
+            proposals = await Proposal.find({[attribute]:{$regex: search, $options:'-i'}}).populate('vendor').skip((page-1)*10).limit(10);
         }else{
-            proposals = await Proposal.find().populate('vendor');
+            proposals = await Proposal.find().populate('vendor').skip((page-1)*10).limit(10);
         }
         res.status(200).json({
             status: true,

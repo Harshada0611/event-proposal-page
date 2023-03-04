@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 const DeleteModal = ({delModal, setDelete, id})=>{
     const handleDiscard = ()=>{
         setDelete({bool: false});
+        document.body.style.pointerEvents = 'auto';
         delModal.current.style.top = '-500px';
     }
 
@@ -19,7 +20,8 @@ const DeleteModal = ({delModal, setDelete, id})=>{
             console.log(response);
             toast.dismiss()
             toast.success('Proposal deleted successfully')
-            delModal.current.style.top = '-300%'
+            delModal.current.style.top = '-300%';
+            document.body.style.pointerEvents = 'auto';
             setDelete({bool: false});
             
         } catch (error) {

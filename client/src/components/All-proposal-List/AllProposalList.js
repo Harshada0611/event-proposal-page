@@ -77,10 +77,11 @@ const AllProposalList = () => {
               name='search'
               required
               value={data.search}
+              autoComplete="off"
               onChange={(e) => setData({ ...data, search: e.target.value })}
             />
             <button>Search</button>
-            <button onClick={(e)=>{e.preventDefault();fetchProposal()}}>Discard</button>
+            <button onClick={(e)=>{e.preventDefault();setData({ attribute: "name", search: "" });fetchProposal()}}>Discard</button>
           </div>
         </form>
         <div className='top-row-right'>

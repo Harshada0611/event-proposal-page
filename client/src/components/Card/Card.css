@@ -4,6 +4,11 @@
     border-radius: 8px;
     margin: 10px;
 }
+.lower-half{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
 
 .img-container{
     height: 150px;
@@ -16,4 +21,14 @@
 .text-container{
     text-align: left;
     padding: 10px;
+}
+
+.remove-bin{
+    color: lightgray;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.remove-bin:hover{
+    color: tomato;
 }

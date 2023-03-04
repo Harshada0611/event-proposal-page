@@ -1,6 +1,6 @@
 import './CardDetails.css';
 import axios from '../../helpers/axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CardDetails = ({ proposal, selected, setSelected }) => {
     const navigate = useNavigate()
@@ -30,9 +30,11 @@ const CardDetails = ({ proposal, selected, setSelected }) => {
         <>
             <section className="heading-container">
                 <p>{'Proposals < '}<span className='bold'>{proposal.name} Contract</span></p>
+                <div>
+                <Link to={'/user'} className='select-btn'>Go Back</Link>
                 {selected === null ?<button className='select-btn' onClick={()=>handleClick(proposal._id)}>Select</button>
-                : selected._id === proposal._id ? <button className='deselct-btn' onClick={()=>handleClick(null)}>Remove</button>:
-                <button className='select-btn' disabled>Select</button>}
+                : <button className='select-btn' disabled>Select</button>}
+                </div>
             </section>
             <section className="details-container">
                 <div className="details-card-container">
@@ -64,10 +66,12 @@ const CardDetails = ({ proposal, selected, setSelected }) => {
                 <section className="venue-container">
                     <h2>Venue and Arrangements</h2>
                     <ul className='list'>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, aliquam!</li>
+                        <li>The right place for occasions, easy to accommodate all. perfect for families</li>
+                        <li>The best experience of your lifetime.</li>
+                        <li>Memories made pricelessly, Because every event matters.</li>
+                        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur culpa quia pariatur eius doloremque at?</li>
+                        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur culpa quia pariatur eius doloremque at?</li>
+                        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur culpa quia pariatur eius doloremque at?</li>
                     </ul>
                 </section>
                 <section className="food-container">
@@ -99,7 +103,12 @@ const CardDetails = ({ proposal, selected, setSelected }) => {
                         <div className="contact">
                             <span className="circle"></span>
                             <h4>Contact 2</h4>
-                            <p>+91 XXXXXXXXXX</p>
+                            <p>1408430201</p>
+                        </div>
+                        <div className="contact">
+                            <span className="circle"></span>
+                            <h4>Contact 3</h4>
+                            <p>1408430204</p>
                         </div>
                     </div>
                 </section>

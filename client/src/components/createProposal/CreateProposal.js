@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./CreateProposal.css"
 import axios from "../../helpers/axios";
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CreateProposal = () => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const CreateProposal = () => {
       for (let key of Object.keys(newProposal)) {
         formdata.append(key, newProposal[key]);
       }
-      for(let image of images){
+      for (let image of images) {
         formdata.append('images', image)
       }
       const token = localStorage.getItem("token")
@@ -65,8 +65,10 @@ const CreateProposal = () => {
 
   return (
     <section className="proposal-form-container">
-
-      <h1 className="proposal-form-heading">Create Proposal</h1>
+      <section className="proposal-form-heading">
+        <Link to={'/vendor'} className="go-back-btn">Go Back</Link>
+        <h1 >Create Proposal</h1>
+      </section>
       <form onSubmit={handleSubmit}>
         <div className="proposal-form-input-container">
           <div className="proposal-form-column">

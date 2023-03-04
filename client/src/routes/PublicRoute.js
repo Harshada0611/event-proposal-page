@@ -1,11 +1,18 @@
 import React from 'react'
-import { Outlet,Navigate } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 //import ErrorPage from './ErrorPage'
 
 function PublicRoute() {
-  const auth = localStorage.getItem('vendorToken') || localStorage.getItem('vendorName') || localStorage.getItem('userName')
+  const token = localStorage.getItem('token');
+  const vendor = localStorage.getItem('vendorName');
   return (
-    (!auth)?<Outlet/>:<Navigate to='/'/>
+    <>
+      {
+        !token ? <Outlet/> :
+        vendor? <Navigate to={'/vendor'}/> : <Navigate to={'/user'}/>
+
+      }
+    </>
   )
 }
 
