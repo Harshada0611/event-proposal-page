@@ -68,10 +68,7 @@ const Home = ({ setDetails, setSelected, selected }) => {
                 </section>}
                 <section className="proposal-container">
                     <h2 className="proposal-heading">Proposals</h2>
-                    {proposals.length === 0 ? <div><h2 style={{color: 'tomato', textAlign: 'center', opacity: '0.7'}}><span className="rotate">{':('}</span>Sorry, no proposals to show!!</h2></div>
-                        :
-                        <>
-                            <form onSubmit={handleSearch} className='search-bar'>
+                    <form onSubmit={handleSearch} className='search-bar'>
                                 <div className="input-container">
                                     <select
                                         name="attribute"
@@ -99,6 +96,9 @@ const Home = ({ setDetails, setSelected, selected }) => {
                                     <button onClick={(e) => { e.preventDefault(); setData({ attribute: "place", search: "", page: 1 }); fetchProposals() }}>Discard</button>
                                 </div>
                             </form>
+                    {proposals.length === 0 ? <div><h2 style={{color: 'tomato', textAlign: 'center', opacity: '0.7'}}><span className="rotate">{':('}</span>Sorry, no proposals to show!!</h2></div>
+                        :
+                        <>
                             <section className="cards-container">
                                 {
                                     proposals.map((proposal, index) => {

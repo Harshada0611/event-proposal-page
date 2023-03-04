@@ -8,7 +8,7 @@ const proposalSchema = new Schema({
     },
     place : {
         type:String,
-        enum : ["Bangalore", "Mumbai", "Pune", "Delhi", "Kochi", "Hyderabad"]
+        enum : ["Bangalore", "Mumbai", "Pune", "Delhi", "Kochi", "Hyderabad", "Chennai"]
     },
     proposalType : {
         type:String,
