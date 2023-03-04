@@ -19,11 +19,11 @@ color: #AAAAAA;
 opacity: 1;
 }
 .edit {
-background: transparent url('') 0% 0% no-repeat padding-box;
+background: transparent no-repeat padding-box;
 opacity: 1;
 }
 .bin  {
-  background: transparent url('') 0% 0% no-repeat padding-box;
+  background: transparent no-repeat padding-box;
   opacity: 1;
 }
 .lower-part {
