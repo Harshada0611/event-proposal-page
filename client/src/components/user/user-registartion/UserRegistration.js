@@ -46,7 +46,9 @@ function UserRegistration() {
     if (password === confirmPassword) {
       const userDetails = { name, email, contact, password, confirmPassword }
       try {
+        toast.loading("Creating Account")
         const response = await axios.post(userRegistrationURL, userDetails)
+        toast.dismiss()
         if (response.data.status) {
           navigate('/user-signin')
           toast.success(response.data.message)
@@ -57,6 +59,7 @@ function UserRegistration() {
         }
       }
       catch (err) {
+        toast.dismiss()
         console.log(err)
         const { response } = err;
         if (Array.isArray(response.data.message)) {

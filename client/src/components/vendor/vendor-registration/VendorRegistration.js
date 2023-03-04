@@ -44,17 +44,23 @@ function VendorRegistration() {
     if (password === confirmPassword) {
       const vendorDetails = { name, email, contact, password, confirmPassword }
       try {
+        toast.loading("Creating Account");
         const response = await axios.post(vendorRegistrationURL, vendorDetails)
         if (response.data.success) {
           console.log(vendorDetails)
+          toast.dismiss()
           toast.success(response.data.message)
           navigate('/')
         }
         else {
+          toast.dismiss()
           toast.error(response.data.message)
         }
       }
-      catch { toast.error('Something went wrong') }
+      catch { 
+        toast.dismiss()
+        toast.error('Something went wrong') 
+      }
     }
     else {
       setPasswordErr(true)

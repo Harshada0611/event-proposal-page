@@ -5,11 +5,14 @@ import './Home.css';
 
 const Home = ({ setDetails, setSelected, selected }) => {
     const [proposals, setProposals] = useState([]);
-    const [data, setData] = useState({ attribute: 'place', page: 1, search: "" })
+    const [data, setData] = useState({ attribute: 'place', page: 1, search: "", toggle: true })
 
     const fetchProposals = async () => {
         try {
-            let url = `/proposal/all/?page=${data.page}`
+            let url = `/proposal/all/?page=${data.page}&`
+            if(data.search){
+                url += `search=${data.search}&attribute=${data.attribute}`
+            }
             const token = localStorage.getItem('token');
             const response = await axios(url, {
                 headers: {
@@ -39,25 +42,16 @@ const Home = ({ setDetails, setSelected, selected }) => {
 
     const handleSearch = async (e) => {
         e.preventDefault()
-        try {
-            const token = localStorage.getItem('token')
-            const response = await axios.get(`/proposal/all/?search=${data.search}&attribute=${data.attribute}`, {
-                headers: {
-                    authorization: token
-                }
-            })
-            setProposals(response.data.proposals)
-        }
-        catch (e) {
-            console.log(e);
-        }
+        console.log('here', data.toggle)
+        setData({...data, page: 1, toggle: !data.toggle})
+        
     }
 
     useEffect(() => {
         fetchProposals();
         fetchSelected()
         // eslint-disable-next-line
-    }, [data.page]);
+    }, [data.page, data.toggle]);
     return (
         <>
             <section className="banner"></section>
@@ -93,7 +87,7 @@ const Home = ({ setDetails, setSelected, selected }) => {
                                         onChange={(e) => setData({ ...data, search: e.target.value })}
                                     />
                                     <button>Search</button>
-                                    <button onClick={(e) => { e.preventDefault(); setData({ attribute: "place", search: "", page: 1 }); fetchProposals() }}>Discard</button>
+                                    <button onClick={(e) => { e.preventDefault(); setData({ attribute: "place", search: "", page: 1, toggle: !data.toggle }); }}>Discard</button>
                                 </div>
                             </form>
                     {proposals.length === 0 ? <div><h2 style={{color: 'tomato', textAlign: 'center', opacity: '0.7'}}><span className="rotate">{':('}</span>Sorry, no proposals to show!!</h2></div>
