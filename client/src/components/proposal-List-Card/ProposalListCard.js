@@ -9,11 +9,13 @@ const ProposalListCard = ({ proposal, setEdit, editModal, setDelete, delModal })
   const handleEdit = ()=>{
       setEdit({bool:true, proposal});
       editModal.current.style.top = '100px';
+      document.body.style.pointerEvents = 'none';
   }
 
   const handleDelete = ()=>{
     setDelete({bool: true, id: proposal._id});
     delModal.current.style.top = '100px';
+    document.body.style.pointerEvents = 'none'
   }
   return (
     <>

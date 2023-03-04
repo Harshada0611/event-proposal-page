@@ -5,31 +5,23 @@
     margin-top: 80px;
 }
 
-.heading-container>.select-btn{
+.heading-container>div>.select-btn{
     border: 1px solid #0078DD;
     border-radius: 4px;
     color: #006BD9;
+    font-size: 1rem;
+    margin-right: 20px;
     padding: 0.5em 1em;
     background-color: #fff;
+    text-decoration: none;
 }
 
-.heading-container>.deselct-btn{
-    border: 1px solid tomato;
-    border-radius: 4px;
-    color: red;
-    padding: 0.5em 1em;
-    background-color: #fff;
+.heading-container>div>.select-btn:hover{
+    background-color: black;
+    color: white;
 }
 
-.heading-container>.deselct-btn:hover{
-    font-weight: bold;
-}
-
-.heading-container>.select-btn:enabled:hover{
-    font-weight: bold;
-}
-
-.heading-container>.select-btn:disabled{
+.heading-container>div>.select-btn:disabled{
     background-color: lightgray;
     opacity: 0.5;
     color: black;
@@ -113,20 +105,24 @@
 .media-container{
     border: 1px solid #EDEDED;
     border-radius: 4px;
+    padding: 20px;
 }
 
 .media-container>h2{
-    padding: 10px 20px;
+    padding: 10px 0;
 }
 
 .media-container>.media-album{
     display: flex;
     flex-wrap: wrap;
+    height: 80%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .media-container>.media-album>img{
     margin: 5px;
-    width: 90px;
+    width: 80px;
     height: 70px;
 }
 

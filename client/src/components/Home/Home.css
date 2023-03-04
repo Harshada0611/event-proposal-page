@@ -1,4 +1,4 @@
-.banner{
+.banner {
     background-image: url('../../../public/images/background/banner.png');
     height: 25vh;
     background-repeat: no-repeat;
@@ -6,17 +6,48 @@
     margin-top: 70px;
 }
 
-.main-section{
+.main-section {
     width: 90vw;
     margin: 0 auto;
 }
 
-.proposal-heading{
+.proposal-heading {
     color: #575A5D;
-    margin:20px 0;
+    margin: 20px 0;
 }
 
-.cards-container{
+.cards-container {
     display: flex;
     flex-wrap: wrap;
+}
+
+.page-btns {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+}
+
+.page-btns>button {
+    font-weight: 1rem;
+    padding: 0.5em 1em;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+}
+
+.page-btns>button:hover{
+    background-color: black;
+    color: white;
+}
+
+.page-btns>button:disabled{
+    background-color: lightgray;
+    opacity: 0.5;
+    color: grey
+}
+
+.rotate{
+    display: inline-block;
+    transform: rotate(90deg);
+    margin-right: 20px;
+    font-size: 2rem;
 }
