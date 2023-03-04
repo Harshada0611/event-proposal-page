@@ -89,6 +89,7 @@ const AllProposalList = () => {
         </div>
       </div>
       <div className='ProposalList-all-cards'>
+      <div style={{ marginTop: '1rem' }}>Proposal posted by you <span style={{ fontWeight: 'bold' }}>{proposal.length}</span></div>
         {
           proposal.map((proposal, index) => {
             return (<ProposalListCard proposal={proposal} key={index} setEdit={setEdit} editModal={editModal} delModal={delModal} setDelete={setDelete}/>)

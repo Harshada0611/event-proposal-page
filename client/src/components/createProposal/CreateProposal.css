@@ -4,9 +4,18 @@
 
 .proposal-form-container {
     width: 60vw;
-    margin: 100px auto;
+    margin:  auto;
     border: var(--border);
     border-radius: 12px;
+    background-color: #FFFFFF;
+}
+
+.bg-proposal-form-container{
+    background-image: url('../../../public/images/background/mainbg.jpeg');
+    background-size: cover;
+    padding: 150px 0 50px 0;
+    background-repeat: no-repeat;
+    margin: 0;
 }
 
 .proposal-form-heading {

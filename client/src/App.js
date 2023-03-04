@@ -29,9 +29,7 @@ function App() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className='NavbarWrapper'>
-        <Navbar auth={auth} setAuth={setAuth}/>
-      </div>
+      <Navbar auth={auth} setAuth={setAuth}/>
       
       <Routes>
         <Route element={<PublicRoute />}>
@@ -52,6 +50,7 @@ function App() {
           <Route path='/vendor' element={<AllProposalList/>}></Route> 
         </Route>
         
+        <Route path='*' element={<h1 style={{color: 'tomato', textAlign: 'center', fontSize: '2.5rem', marginTop: '200px'}}><span className="rotate">{':('}</span>404 Page not found</h1>}/>
       </Routes>
     </>
   );

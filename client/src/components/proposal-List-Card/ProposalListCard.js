@@ -9,6 +9,7 @@ const ProposalListCard = ({ proposal, setEdit, editModal, setDelete, delModal })
   const handleEdit = ()=>{
       setEdit({bool:true, proposal});
       editModal.current.style.top = '100px';
+      editModal.current.scrollIntoView()
       document.body.style.pointerEvents = 'none';
   }
 
