@@ -1,9 +1,11 @@
 import './CardDetails.css';
 import axios from '../../helpers/axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const CardDetails = ({ proposal, selected, setSelected }) => {
+const CardDetails = ({selected, setSelected }) => {
     const navigate = useNavigate()
+    const proposal = JSON.parse(localStorage.getItem('details'))
 
     const handleClick = async (id)=>{
         try{
@@ -25,6 +27,11 @@ const CardDetails = ({ proposal, selected, setSelected }) => {
             console.log(e)
         }
     }
+    if(proposal === null){
+        navigate('/user')
+    }
+    useEffect(()=>{
+    },[])
 
     return (
         <>
