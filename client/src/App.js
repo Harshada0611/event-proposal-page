@@ -24,7 +24,6 @@ import AllProposalList from './components/All-proposal-List/AllProposalList';
 //user private routes
 function App() {
   const [auth, setAuth] = useState("");
-  const [details, setDetails] = useState(null);
   const [selected, setSelected] = useState(null);
   return (
     <>
@@ -41,8 +40,8 @@ function App() {
 
 
         <Route element={<UserPrivateRoute />}>
-          <Route path='/user' element={<Home selected={selected} setSelected={setSelected} setDetails={setDetails}/>}></Route>
-          <Route path='/proposal-details' element={<CardDetails proposal={details} selected={selected} setSelected={setSelected}/>}></Route>
+          <Route path='/user' element={<Home selected={selected} setSelected={setSelected}/>}></Route>
+          <Route path='/proposal-details' element={<CardDetails selected={selected} setSelected={setSelected}/>}></Route>
         </Route>
 
         <Route element={<VendorPrivateRoute />}>

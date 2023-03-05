@@ -1,8 +1,9 @@
-import React from 'react'
-import './logoutWrapper.css'
-import { useNavigate } from 'react-router-dom'
-import profileIcon from './profileIcon.png'
-import logout from './logout.png'
+import React from 'react';
+import './logoutWrapper.css';
+import { useNavigate } from 'react-router-dom';
+import profileIcon from './profileIcon.png';
+import logout from './logout.png';
+import toast from 'react-hot-toast';
 
 function LogoutBtn({setAuth}) {
 
@@ -11,7 +12,8 @@ function LogoutBtn({setAuth}) {
     //handle logout function
     const handleLogout = () => {
         localStorage.removeItem('vendorName') || localStorage.removeItem('userName') || localStorage.removeItem('token')
-        setAuth("")
+        setAuth("");
+        toast.success('You logged out successfully!!')
         navigate('/')
     }
 

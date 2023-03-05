@@ -7,7 +7,7 @@ import axios from '../../helpers/axios';
 const Card = ({proposal, setDetails, selected, setSelected})=>{
     const navigate = useNavigate()
     const handleClick = ()=>{
-        setDetails(proposal);
+        localStorage.setItem('details', JSON.stringify(proposal));
         navigate('/proposal-details')
     }
     const handleDelete = async (e)=>{

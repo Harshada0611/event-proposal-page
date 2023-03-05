@@ -3,7 +3,7 @@ import Card from "../Card/Card";
 import axios from "../../helpers/axios";
 import './Home.css';
 
-const Home = ({ setDetails, setSelected, selected }) => {
+const Home = ({setSelected, selected }) => {
     const [proposals, setProposals] = useState([]);
     const [data, setData] = useState({ attribute: 'place', page: 1, search: "", toggle: true })
 
@@ -58,7 +58,7 @@ const Home = ({ setDetails, setSelected, selected }) => {
             <section className="main-section">
                 {selected !== null && <section className="selected-container">
                     <h2 className="proposal-heading">Selected</h2>
-                    <Card proposal={selected} setDetails={setDetails} selected={true} setSelected={setSelected} />
+                    <Card proposal={selected} selected={true} setSelected={setSelected} />
                 </section>}
                 <section className="proposal-container">
                     <h2 className="proposal-heading">Proposals</h2>
@@ -97,7 +97,7 @@ const Home = ({ setDetails, setSelected, selected }) => {
                                 {
                                     proposals.map((proposal, index) => {
                                         return (
-                                            <Card proposal={proposal} key={index} setDetails={setDetails} />
+                                            <Card proposal={proposal} key={index} />
                                         )
                                     })
                                 }
